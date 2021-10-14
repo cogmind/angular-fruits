@@ -2,12 +2,12 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Fruit } from '../data/fruit';
 import { FruitService } from '../data/fruit.service';
-
 @Component({
   selector: 'app-item-list',
   templateUrl: './app-item-list.component.html',
   styleUrls: ['./app-item-list.component.sass']
 })
+  
 export class AppItemListComponent implements OnInit {
 
   @Input('title') title: string = '';
@@ -15,7 +15,18 @@ export class AppItemListComponent implements OnInit {
 
   @Output() fruitClickedEvent = new EventEmitter<Fruit>();
 
-  constructor(private fruitService: FruitService, private router: Router) { }
+  fruitData: Fruit[] = [];
+  displayedColumns: string[] = ['id', 'name', 'isHighlighted'];
+  selectOptions: string[] = ['One', 'Many'];
+  selectedValue: string = '';
+  loading: boolean = true;
+  
+  constructor(private fruitService: FruitService, private router: Router) {
+
+    this.fruitService.getAllFruits().subscribe((results) => {
+      this.loading = false; this.fruitData = results
+  });
+  }
 
   ngOnInit() {
   }

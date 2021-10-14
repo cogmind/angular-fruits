@@ -1,4 +1,17 @@
 $LMARG: 80 rem
+$rb1: #e6261f
+$rb2: #eb7532
+$rb3: #f7d038
+$rb4: #a3e048
+$rb5: #49da9a
+$rb6: #34bbe6
+$rb7: #4355db
+$rb8: #d23be7
+$rb: $rb1, $rb2, $rb3, $rb4, $rb5, $rb6, $rb7, $rb8
+
+@for $i from 1 through length($rb)
+  tr:nth-child(#{length($rb)}n+#{$i})
+    background: nth($rb, $i)
 
 ul, h1, h2, h3
   font-family: sans-serif
@@ -16,5 +29,5 @@ li
   display: flex
   background-color: grey
   padding: 200 px
-  margin-right: 800px
+  margin-right: 400px
   justify-content: flex-end

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, of, timer } from "rxjs";
+import { map } from "rxjs/operators";
 import { Fruit } from "./fruit";
 
 @Injectable({
@@ -24,7 +25,7 @@ export class FruitService {
   }
 
   getAllFruits(): Observable<Fruit[]> {
-    return of(this.fruits);
+    return timer(1000).pipe(map(n => this.fruits));
   }
   
   getFruitById(fruitId: number): Observable<Fruit> {

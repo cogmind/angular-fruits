@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() =>{this.fruitService.getAllFruits().subscribe((result) => (this.fruits = result))}, 3000)
+    // setTimeout(() =>{this.fruitService.getAllFruits().subscribe((result) => (this.fruits = result))}, 3000)
+    this.fruitService.getAllFruits().subscribe((result) => (this.fruits = result));
   }
 
   switchPage() {
