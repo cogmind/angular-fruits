@@ -1,0 +1,11 @@
+<h2>{{title}}</h2>
+<ul>
+  <li *ngFor="let fruit of fruits" (click)="onClickFruit(fruit)"
+    [ngClass]="{'orange' : fruit.isHighlighted, 'black' : !fruit.isHighlighted}">
+    {{fruit.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="buttons">
+      <button (click)="editFruit(fruit.id)" type="button" class="edit">Edit</button>
+      <button (click)="deleteFruit(fruit.id)" type="button" class="delete">Delete</button>
+    </div>
+  </li>
+</ul>
