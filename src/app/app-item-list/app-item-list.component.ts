@@ -22,10 +22,6 @@ export class AppItemListComponent implements OnInit {
   loading: boolean = true;
   
   constructor(private fruitService: FruitService, private router: Router) {
-
-    this.fruitService.getAllFruits().subscribe((results) => {
-      this.loading = false; this.fruitData = results
-  });
   }
 
   ngOnInit() {

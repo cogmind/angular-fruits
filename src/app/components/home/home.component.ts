@@ -12,21 +12,21 @@ import { FruitService } from 'src/app/data/fruit.service';
 export class HomeComponent implements OnInit {
 
   title: string = 'my-app';
-
   fruit: Fruit = new Fruit(-1, '', false);
-
   randomFruit: Fruit = new Fruit(-1, '', false);
-
   fruits: Fruit[] = [];
-
   button_text: string = "Click me";
+  loading: boolean = true;
 
   constructor(private router : Router, private fruitService : FruitService) { //Dependency injection (globalt tillgänglig service)
   }
 
   ngOnInit(): void {
     // setTimeout(() =>{this.fruitService.getAllFruits().subscribe((result) => (this.fruits = result))}, 3000)
-    this.fruitService.getAllFruits().subscribe((result) => (this.fruits = result));
+        this.fruitService.getAllFruits().subscribe((results) => {
+      this.loading = false; this.fruits = results
+  });
+
   }
 
   switchPage() {
