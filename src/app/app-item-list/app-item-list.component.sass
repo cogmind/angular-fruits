@@ -1,7 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap')
+
 $LMARG: 80 rem
 
-ul, h1, h2, h3
-  font-family: sans-serif
+$rb1: #e6261f
+$rb2: #eb7532
+$rb3: #f7d038
+$rb4: #a3e048
+$rb5: #49da9a
+$rb6: #34bbe6
+$rb7: #4355db
+$rb8: #d23be7
+$rb: $rb1, $rb2, $rb3, $rb4, $rb5, $rb6, $rb7, $rb8
+$br: $rb8, $rb7, $rb6, $rb5, $rb4, $rb3, $rb2, $rb1
+
+@for $i from 1 through length($rb)
+  tr:nth-child(#{length($rb)}n+#{$i})
+    background: desaturate(nth($rb, $i), 30%)
+
+h1, h2, h3, p, a
+  font-family: "Quicksand", sans-serif
+  margin-left: 4.2rem
+
+button
+  margin-bottom: 1rem
+
+.mat-column-id
+  color: white
+  padding-right: 3rem
+
+.mat-column-isHighlighted
+  padding-left: 1rem
+
+th
+  color: white
+
+.fruit
+  display: flex
+  font-weight: bolder
 
 .orange
   color: orange
@@ -9,12 +44,7 @@ ul, h1, h2, h3
 .black
   color: black
 
-ul
-  padding-right: 9rem
-li
-  padding: 1.5rem 1.75rem 0.25rem 0
-  display: flex
-  background-color: grey
-  padding: 200 px
-  margin-right: 800px
-  justify-content: flex-end
+table
+  margin: 0 auto
+  padding: 1.0rem 1.0rem 1.0rem 1.0rem
+  background-color: #444

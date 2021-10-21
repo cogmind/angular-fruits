@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, of, timer } from "rxjs";
+import { map } from "rxjs/operators";
 import { Fruit } from "./fruit";
 
 @Injectable({
@@ -7,28 +8,46 @@ import { Fruit } from "./fruit";
 })
 export class FruitService {
 
-  fruits: Fruit[] = [
-    new Fruit(1, 'Orange', false), new Fruit(2, 'Banana', false), new Fruit(3, 'Kiwi', false), new Fruit(3, 'Apple', false), new Fruit(4, 'Grapes', false), new Fruit(5, 'Coconut', false)];
-
+  fruits: Fruit[] = [];
+  fruits_old: Fruit[] = [
+    new Fruit(1, 'Orange', false), new Fruit(2, 'Banana', false), new Fruit(3, 'Kiwi', false), new Fruit(4, 'Apple', false), new Fruit(5, 'Grapes', false), new Fruit(6, 'Coconut', false)];
+  
+    //fruits : Fruit[] = this.initFruits();
   fruitName: string = '';
-  constructor() { }
+  constructor(
+  ) {
+    this.initFruits().then((result: Fruit[]) => {
+      this.fruits = result;
+      return this.fruits;
+    });
+  }
 
-  // DONE Lägg till observables
-  // DONE Lägg till en delay
-  // Styla bakgrunden och alignment, använd rem units, display: flex list-item
-  // Samma storlek på alla namn
-
+  async initFruits() : Promise<Fruit[]> {
+    let fruitNames = await (await fetch('http://localhost:4200/assets/fruits.json')).json();
+    
+    let fruits: Fruit[] = [];
+    let id: number = 1;
+    for (let fruitName of fruitNames[0].fruits) {
+      console.log(fruitName);
+      fruits.push(new Fruit(id++, fruitName, false));
+    }
+    return fruits;
+  }
   
   addFruit(fruitName: string) {
     this.fruits.push(new Fruit(this.fruits.length + 1, fruitName, false));
   }
 
   getAllFruits(): Observable<Fruit[]> {
-    return of(this.fruits);
+    return timer(1000).pipe(map(n => this.fruits));
   }
   
   getFruitById(fruitId: number): Observable<Fruit> {
-    return of(this.fruits.find(fruit => fruit.id === fruitId)!);
+    return timer(Math.random() * 3000).pipe(map((results) => {
+      const fruit = this.fruits.find(fruit => fruit.id === fruitId)!;
+      console.log(fruit.name);
+      return fruit
+    }));
   }
   
   getFruitName(): Observable<string> {
