@@ -1,10 +1,12 @@
-<div>
+<div class="centerDiv">
   <h1>Hello world</h1>
-  <app-item-list [title]="'Fruits'" [fruits]="getFruits()" (fruitClickedEvent)="onFruitClickedEvent($event)">
+  <button (click)="runForkJoin()" type="button">Reload list with forkJoin</button>
+  <app-item-list *ngIf="!loading" [title]="'Fruits'" [fruits]="getFruits()" (fruitClickedEvent)="onFruitClickedEvent($event)">
   </app-item-list>
   <mat-spinner *ngIf="loading"></mat-spinner>
+  <br>
   <h1>Fruit of the month: <em>{{randomFruit.name}}</em></h1>
   <button (click)="changeButton()" type="button">{{button_text}}</button>
-  <app-item-list [title]="'Selected fruits'" [fruits]="getSelectedFruits()"></app-item-list>
+  <app-item-list *ngIf="!loading" [title]="'Selected fruits'" [fruits]="getSelectedFruits()"></app-item-list>
   <button type="button" (click)="switchPage()">Create Fruit</button>
 </div>

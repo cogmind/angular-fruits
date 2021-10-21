@@ -1,5 +1,7 @@
-<h3>Editing {{fruit.name}}</h3>
-<label for="fruitName">New fruit name:</label>
-<br>
-<input [(ngModel)]="newName" type="text" name="fruitName" [placeholder]="fruit.name"/>
-<button (click)="changeName()" type="button">Change name</button>
+<div class="centerDiv">
+  <h3>Editing <span class="fruitName">{{fruit.name}}</span></h3>
+  <label for="fruitName">New fruit name:</label>
+  <br>
+  <input [(ngModel)]="newName" type="text" name="fruitName" [placeholder]="fruit.name"/>
+  <button (click)="changeName()" type="button">Change name</button>
+</div>
